@@ -13,9 +13,9 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       controller: 'formController',
       templateUrl: './client/register/register.html'
     })
-
+    //NEED TO INSERT GOOGLE MAPS API
   uiGmapGoogleMapApiProvider.configure({
-    key: 'AIzaSyCyhGXFgrHmsvQkerWmO20WwZsvrc9xfjs',
+    key: '',
     v: '3.20', //defaults to latest 3.X anyhow
     libraries: 'weather,geometry,visualization'
   });

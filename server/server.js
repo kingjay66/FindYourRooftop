@@ -17,7 +17,7 @@ app.use(express.static(__dirname + '/..'));
 
 
 app.use(session({
-  secret: "",
+  secret: "test",
   resave: false,
   saveUninitialized: true
 }));
