@@ -14,7 +14,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/..'));
-
+app.use(function(req, _, next) {
+  console.log('received a ' + req.method + ' for ' + req.path);
+  next();
+})
 
 app.use(session({
   secret: "test",
@@ -82,6 +85,6 @@ app.use('/user', userRouter);
 app.use('/menu', menuRouter);
 
 app.listen(3000);
-
+console.log('Listening on 3000...')
 module.exports = app;
 
