@@ -15,3 +15,7 @@ After a user logs in, there is a bug where the search feature does not put the c
 error does not occur when a user is not logged in. 
 
 Register.js could be refactored in the promises.
+
+### Mobile Experience
+
+We developed the mobile version of FYR using React Native. To facilitate the development, ExponentJS was used. ExponentJS allowed for the mobile tests to be run on an iOS device, which allow us to *feel* the application we were developing. Head over to ExponentJS's GitHub to install the software. https://github.com/exponentjs/xde
