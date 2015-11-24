@@ -1,14 +1,12 @@
 var fire = require('firebase');
 var Fireproof = require('fireproof');
 var Promise = require('bluebird');
-// var ref = new fire('https://rooftopapp.firebaseio.com/');
 var ref = new fire('https://crackling-heat-2550.firebaseio.com/');
 var fireproof = new Fireproof(ref);
 Fireproof.bless(Promise);
 var usersRef = fireproof.child('users');
 //note: use 'results' for now. expect to change to 'curated' in final db
 var curatedRef = fireproof.child('results');
-
 
 // search queries
 exports.getList = function(req, res, next) {
