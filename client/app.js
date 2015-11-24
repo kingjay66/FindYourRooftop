@@ -41,6 +41,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       },
       data: {name: name, postal_code: postal}
     }).then(function(res) {
+      console.log('inside app.js $scope.findMenu');
       console.log(res.data);
       $scope.menu = res.data;
     })
@@ -52,11 +53,12 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
     var integers = ['0','1','2','3','4','5','6','7','8','9']
     var data;
     if(integers.indexOf(searchParam[0]) >= 0) {
-    	data = {zipCode: searchParam}
+    	data = {zipCode: searchParam};
     } else {
-    	data = {city: searchParam}
+    	data = {city: searchParam};
     }
-    console.log(data)
+    console.log('inside app.js $scope.sendZipCode');
+    console.log(data);
     return $http({
       method: 'POST',
       url: '/list',
@@ -65,6 +67,8 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       },
       data: data
     }).then(function(res) {
+      console.log('inside app.js $scope.sendZipCode .then');
+      console.log(res.data);
       $scope.list = res.data;
 
       //---Google Maps start---
