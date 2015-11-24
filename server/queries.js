@@ -1,31 +1,50 @@
 var fire = require('firebase');
 var Fireproof = require('fireproof');
 var Promise = require('bluebird');
-var ref = new fire('https://rooftopapp.firebaseio.com/');
+// var ref = new fire('https://rooftopapp.firebaseio.com/');
+var ref = new fire('https://crackling-heat-2550.firebaseio.com/');
 var fireproof = new Fireproof(ref);
 Fireproof.bless(Promise);
 var usersRef = fireproof.child('users');
+var resultsRef = fireproof.child('results');
 
 
 // search queries
 exports.getList = function(req, res, next) {
   res.bars = [];
+  console.log('getting a zipcode:');
   console.log(req.body.zipCode);
+  console.log('getting a city');
+  console.log(req.body.city);
 	if (req.body.city) {
-		// console.log('got a city search for ' + req.body.city);
+		console.log('got a city search for ' + req.body.city);
 		queryDB(req, res, next, 'location/city', req.body.city);
+		//Tim's note: use below for version2 of json file. currently using version1.
+		// queryDB(req, res, next, 'city', req.body.city);
 	} else if (req.body.zipCode) {
-		// console.log('got a zip search for ' + req.body.zipCode);
+		console.log('got a zip search for ' + req.body.zipCode);
 		queryDB(req, res, next, 'location/postal_code', req.body.zipCode);
+		// queryDB(req, res, next, 'postal_code', req.body.zipCode);
+	} else {
+		console.log('PLEASE ENTER A CITY OR ZIP CODE');
 	}
 };
 
 // helper for getList^
 function queryDB(req, res, next, searchParam, queryParam) {
 	console.log('going to look for bars in the db');
-	fireproof.orderByChild(searchParam)
+	console.log('searchParam is: ' + searchParam);
+	console.log('queryParam is: ' + queryParam);
+	fireproof.child('results').orderByChild(searchParam)
 	.equalTo(queryParam)
 	.on('child_added', function(snapshot) {
+		console.log('inside search');
+		console.log(snapshot);
+		var testName = snapshot.key();
+		var testData = snapshot.val();
+		console.log('testName is: ' + testName);
+		console.log('testData is: ' + testData);
+		console.log('something found in db');
 		res.bars.push(snapshot.val());
 	})
 	.then(function() {

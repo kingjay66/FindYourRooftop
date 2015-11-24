@@ -30,6 +30,7 @@ var listRouter = express.Router();
 
 listRouter.post('/', query.getList, function(req, res) {
   console.log('getting a POST request for /list');
+  console.log('BARS : ');
   res.send(res.bars);
 })
 
