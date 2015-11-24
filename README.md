@@ -19,3 +19,5 @@ Register.js could be refactored in the promises.
 ### Mobile Experience
 
 We developed the mobile version of FYR using React Native. To facilitate the development, ExponentJS was used. ExponentJS allowed for the mobile tests to be run on an iOS device, which allow us to *feel* the application we were developing. Head over to ExponentJS's GitHub to install the software. https://github.com/exponentjs/xde
+
+To facilitate `state` management with React, we use Redux. Redux is an alternative to Facebook's Flux architecture. Both architectures allow for unidirectional data flow, which is a core tenant of React development. Check out this fantastic video series on Redux created by the author of the Redux framework: https://egghead.io/lessons/javascript-redux-the-single-immutable-state-tree?series=getting-started-with-redux. This is an indispensible resource for anyone new to Redux.
