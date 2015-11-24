@@ -6,7 +6,8 @@ var ref = new fire('https://crackling-heat-2550.firebaseio.com/');
 var fireproof = new Fireproof(ref);
 Fireproof.bless(Promise);
 var usersRef = fireproof.child('users');
-var resultsRef = fireproof.child('results');
+//note: use 'results' for now. expect to change to 'curated' in final db
+var curatedRef = fireproof.child('results');
 
 
 // search queries
@@ -113,6 +114,35 @@ exports.findUser = function(req, res, user, callback) {
 		}
 	})
 };
+
+exports.findLocation = function(req, res, location, callback) {
+	console.log('going to look for curated location in db');
+	var found;
+	//note: 'name' is a placeholder pending final db setup
+	curatedRef.orderByChild('name')
+	.equalTo(req.body.name)
+	.on('child_added', function(snapshot) {
+		console.log('Curated Location was found: ');
+		found = snapshot.val();
+	}, function() {
+		console.log('error in querying for curated location');
+		res.send('db error');
+	})
+	.then(function() {
+		if (found) {
+			console.log('(findLocation) we found ' );
+			callback(req, res, location, found);
+		} else if (found === null) {
+			console.log('the location is null');
+			res.send('location not found');
+		}
+	})
+};
+
+exports.addLocation = function(req, res, location, callback) {
+  curatedRef.push(location);
+  callback(req, res, user);
+}
 
 
 // firebase's user creation method, 
