@@ -18,6 +18,10 @@ app.use(function(req, _, next) {
   console.log('received a ' + req.method + ' for ' + req.path);
   next();
 })
+app.use(function(req, _, next) {
+  console.log('Received a ' + req.method + ' for: ' + req.path);
+  next();
+});
 
 app.use(session({
   secret: "test",
@@ -25,12 +29,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
-
 var listRouter = express.Router();
 
 listRouter.post('/', query.getList, function(req, res) {
   console.log('getting a POST request for /list');
-  console.log('BARS : ');
   res.send(res.bars);
 })
 
@@ -38,7 +40,6 @@ listRouter.get('/', function(req, res) {
   console.log('getting a GET request for /list/');
   res.send('session created');
 })
-
 
 var userRouter = express.Router();
 
@@ -89,3 +90,5 @@ app.listen(3000);
 console.log('Listening on 3000...')
 module.exports = app;
 
+
+module.exports = app;
