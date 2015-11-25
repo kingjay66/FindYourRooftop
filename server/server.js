@@ -29,12 +29,28 @@ app.use(session({
   saveUninitialized: true
 }));
 
+
+var adminRouter = express.Router();
+
+adminRouter.post('/', query.postToDB, function(req, res) {
+  console.log('posted suggestion to database!');
+  res.send('posted suggestion to database!');
+  // res.send({status:201, message: })
+})
+
+
 var listRouter = express.Router();
 
 listRouter.post('/', query.getList, function(req, res) {
   console.log('getting a POST request for /list');
   res.send(res.bars);
 })
+
+// listRouter.post('/', query.postToDB, function(req, res) {
+//   console.log('posted suggestino to database!');
+//   res.send('posted suggestion to database!');
+//   // res.send({status:201, message: })
+// })
 
 listRouter.get('/', function(req, res) {
   console.log('getting a GET request for /list/');
@@ -82,6 +98,7 @@ menuRouter.post('/', menu.downloadMenu, function(req, res, next) {
 })
 
 // apply routes to application
+app.use('/admin', adminRouter);
 app.use('/list', listRouter);
 app.use('/user', userRouter);
 app.use('/menu', menuRouter);
