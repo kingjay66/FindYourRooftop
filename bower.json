@@ -16,7 +16,4 @@
     "angular-simple-logger": "~0.1.5",
     "angular-google-maps": "~2.2.1"
   },
-  "resolutions": {
-    "angular-simple-logger": "~0.1.5"
-  }
 }

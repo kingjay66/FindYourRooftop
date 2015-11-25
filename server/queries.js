@@ -18,8 +18,12 @@ exports.getList = function(req, res, next) {
   console.log('getting a city');
   console.log(req.body.city);
 	if (req.body.city) {
-		console.log('got a city search for ' + req.body.city);
-		queryDB(req, res, next, 'location/city', req.body.city);
+		var camelCaseString = function(string) {
+        return string.replace(/(\b[a-z])/g, function(char) { return char.toUpperCase() });
+      };
+    var city = camelCaseString(req.body.city);
+		console.log('got a city search for ' + city);
+		queryDB(req, res, next, 'location/city', city);
 		//Tim's note: use below for version2 of json file. currently using version1.
 		// queryDB(req, res, next, 'city', req.body.city);
 	} else if (req.body.zipCode) {
