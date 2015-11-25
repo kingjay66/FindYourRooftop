@@ -30,6 +30,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
 
   $scope.list = [];
   $scope.menu = [];
+  $scope.isLoggedIn = true;
 
   $scope.findMenu = function(name, postal) {
     console.log(name, postal)

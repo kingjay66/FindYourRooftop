@@ -18,6 +18,7 @@ angular.module('register', [])
 			console.log('Res.data says: ' + response.data);
 			if (response.data === 'session created') {
 				console.log('successful login');
+				// $scope.isLoggedIn = true;
 				$location.path('/');
 			} else if (response.data === 'user not found') {
 				alert('user not found');
@@ -30,6 +31,7 @@ angular.module('register', [])
 				$location.path('/signup');
 			} else if (response.data === 'logged in') {
 				console.log('user is already logged in');
+				// $scope.isLoggedIn = true;
 				$location.path('/');
 			}
 		})
