@@ -5,9 +5,12 @@ var ref = new fire('https://crackling-heat-2550.firebaseio.com/');
 var fireproof = new Fireproof(ref);
 Fireproof.bless(Promise);
 var usersRef = fireproof.child('users');
+<<<<<<< HEAD
 //note: use 'results' for now. expect to change to 'curated' in final db
 var curatedRef = fireproof.child('results');
 var suggestedRef = fireproof.child('suggestions')
+=======
+>>>>>>> ce7e47b63e726ec1c712c93961b799c0c3bc32ad
 
 // search queries
 exports.getList = function(req, res, next) {
