@@ -55,6 +55,11 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
     if(integers.indexOf(searchParam[0]) >= 0) {
     	data = {zipCode: searchParam};
     } else {
+
+      var camelCaseString = function(string) {
+        return string.replace(/(\b[a-z])/g, function(char) { return char.toUpperCase() });
+      };
+      searchParam = camelCaseString(searchParam);
     	data = {city: searchParam};
     }
     console.log('inside app.js $scope.sendZipCode');
