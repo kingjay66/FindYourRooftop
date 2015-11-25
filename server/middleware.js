@@ -2,7 +2,7 @@ var query = require('./queries');
 var bcrypt = require('bcrypt');
 var session = require('express-session');
 var promisify = require("promisify-node");
-
+//test
 exports.validateLogin = function(req, res) {
 	var em = req.body.email;
 	var pass = req.body.password;
