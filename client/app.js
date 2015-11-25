@@ -50,6 +50,13 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
   // $scope.test = function () {
   //   console.log('HELLOO TESTING: ' + ref.child('results'))
   // }
+  $scope.sendSuggestion = function(name, address, description) {
+    return $http({
+      method: 'POST',
+      url: '/admin',
+      data: {restaurant: name, address: address, description: description}
+    })
+  }
 
   $scope.sendZipCode  = function(searchParam) {
     // var params = '{enter query}';
@@ -82,8 +89,6 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       var count = 0;
 
       for (var key in $scope.list) {
-
-        console.log($scope.list[key])
         var latitude = $scope.list[key].location.coordinate.latitude;
         var longitude = $scope.list[key].location.coordinate.longitude;
         var name = $scope.list[key].name;
