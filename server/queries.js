@@ -1,14 +1,13 @@
 var fire = require('firebase');
 var Fireproof = require('fireproof');
 var Promise = require('bluebird');
-// var ref = new fire('https://rooftopapp.firebaseio.com/');
 var ref = new fire('https://crackling-heat-2550.firebaseio.com/');
 var fireproof = new Fireproof(ref);
 Fireproof.bless(Promise);
 var usersRef = fireproof.child('users');
 //note: use 'results' for now. expect to change to 'curated' in final db
 var curatedRef = fireproof.child('results');
-
+var suggestedRef = fireproof.child('suggestions')
 
 // search queries
 exports.getList = function(req, res, next) {
@@ -34,6 +33,13 @@ exports.getList = function(req, res, next) {
 		console.log('PLEASE ENTER A CITY OR ZIP CODE');
 	}
 };
+
+exports.postToDB = function(req, res, next) {
+	console.log('HI CHELSEA');
+	console.log('blahblah response is: ' + req.body.restaurant)
+	suggestedRef.push(req.body)
+	next();
+}
 
 // helper for getList^
 function queryDB(req, res, next, searchParam, queryParam) {

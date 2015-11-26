@@ -1,5 +1,4 @@
 angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.router', 'register'])
-
 .config(function(uiGmapGoogleMapApiProvider , $stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/main');
   $stateProvider
@@ -48,6 +47,17 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
   }
   console.log('test');
 
+  // $scope.test = function () {
+  //   console.log('HELLOO TESTING: ' + ref.child('results'))
+  // }
+  $scope.sendSuggestion = function(name, address, description) {
+    return $http({
+      method: 'POST',
+      url: '/admin',
+      data: {restaurant: name, address: address, description: description}
+    })
+  };
+
   $scope.sendZipCode  = function(searchParam) {
     // var params = '{enter query}';
     var integers = ['0','1','2','3','4','5','6','7','8','9']
@@ -70,7 +80,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       console.log('inside app.js $scope.sendZipCode .then');
       console.log(res.data);
       $scope.list = res.data;
-
+      console.log('scope list is : ' + $scope.list[key])
       //---Google Maps start---
       $scope.markerList = [];
       var markers = [];
@@ -79,6 +89,8 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       var count = 0;
 
       for (var key in $scope.list) {
+
+        console.log($scope.list[key])
         var latitude = $scope.list[key].location.coordinate.latitude;
         var longitude = $scope.list[key].location.coordinate.longitude;
         var name = $scope.list[key].name;
@@ -116,6 +128,9 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
     });
   };
 
+  // $scope.test function() {
+
+  // }
 
   $scope.logout = function() {
     $http({
