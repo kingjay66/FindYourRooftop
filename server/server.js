@@ -29,17 +29,31 @@ app.use(session({
   saveUninitialized: true
 }));
 
-var listRouter = express.Router();
+var homeRouter = express.Router();
 
-listRouter.post('/', query.getList, function(req, res) {
-  console.log('getting a POST request for /list');
+homeRouter.post('/', query.getList, function(req, res) {
+  console.log('getting a POST request for /home');
   res.send(res.bars);
 })
 
-listRouter.get('/', function(req, res) {
-  console.log('getting a GET request for /list/');
+homeRouter.get('/', function(req, res) {
+  console.log('getting a GET request for /home');
   res.send('session created');
 })
+
+var mainRouter = express.Router();
+
+mainRouter.post('/main', query.getList, function(req, res) {
+  console.log('getting a POST request for /main');
+  res.send(res.bars);
+})
+
+mainRouter.get('/main', function(req, res) {
+  console.log('getting a GET request for /main');
+  res.send('session created');
+})
+
+var adminRouter = express.Router();
 
 var userRouter = express.Router();
 
@@ -82,9 +96,11 @@ menuRouter.post('/', menu.downloadMenu, function(req, res, next) {
 })
 
 // apply routes to application
-app.use('/list', listRouter);
+app.use('/home', homeRouter);
 app.use('/user', userRouter);
 app.use('/menu', menuRouter);
+app.use('/main', mainRouter);
+app.use('/admin', adminRouter);
 
 app.listen(3000);
 console.log('Listening on 3000...')

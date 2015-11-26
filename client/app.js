@@ -1,9 +1,9 @@
 angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.router', 'register'])
 
 .config(function(uiGmapGoogleMapApiProvider , $stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/main');
+  $urlRouterProvider.otherwise('/home');
   $stateProvider
-    .state('main', {
+    .state('home', {
       url: '/',
       controller: 'appController',
       templateUrl: 'index.html'
@@ -12,6 +12,11 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       url: '/signup',
       controller: 'formController',
       templateUrl: './client/register/register.html'
+    })
+    .state('main', {
+      url: '/main',
+      controller: 'appController',
+      templateUrl: 'index2.html'
     })
     //NEED TO INSERT GOOGLE MAPS API
   uiGmapGoogleMapApiProvider.configure({
@@ -30,6 +35,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
 
   $scope.list = [];
   $scope.menu = [];
+  //how/where to change isLoggedIn elsewhere? also, use the isLoggedIn helper function?
   $scope.isLoggedIn = true;
 
   $scope.findMenu = function(name, postal) {
@@ -62,7 +68,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
     console.log(data);
     return $http({
       method: 'POST',
-      url: '/list',
+      url: '/home',
       headers: {
         "Content-Type": "application/JSON"
       },

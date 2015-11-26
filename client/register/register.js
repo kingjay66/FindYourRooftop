@@ -19,7 +19,7 @@ angular.module('register', [])
 			if (response.data === 'session created') {
 				console.log('successful login');
 				// $scope.isLoggedIn = true;
-				$location.path('/');
+				$location.path('/main');
 			} else if (response.data === 'user not found') {
 				alert('user not found');
 				$location.path('/signup');
@@ -32,7 +32,7 @@ angular.module('register', [])
 			} else if (response.data === 'logged in') {
 				console.log('user is already logged in');
 				// $scope.isLoggedIn = true;
-				$location.path('/');
+				$location.path('/main');
 			}
 		})
 		.catch(function(data, status) {
@@ -54,7 +54,7 @@ angular.module('register', [])
 		}).then(function(response) {
 			if (response.data === 'session created') {
 				console.log('redirecting to main')
-				$location.path("/");
+				$location.path("/main");
 			} else if (response.data === 'email exists') {
 				console.log('email is taken');
 				alert('there is already a user with that email address');
