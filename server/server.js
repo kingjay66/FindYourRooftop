@@ -40,30 +40,37 @@ adminRouter.post('/', query.postToDB, function(req, res) {
 
 var adminRouter = express.Router();
 
-adminRouter.post('/', query.postToDB, function(req, res) {
+adminRouter.post('/admin', query.postToDB, function(req, res) {
   console.log('posted suggestion to database!');
   res.send('posted suggestion to database!');
   // res.send({status:201, message: })
 })
 
 
-var listRouter = express.Router();
+var homeRouter = express.Router();
 
-listRouter.post('/', query.getList, function(req, res) {
-  console.log('getting a POST request for /list');
+homeRouter.post('/', query.getList, function(req, res) {
+  console.log('getting a POST request for /home');
   res.send(res.bars);
 })
 
-// listRouter.post('/', query.postToDB, function(req, res) {
-//   console.log('posted suggestino to database!');
-//   res.send('posted suggestion to database!');
-//   // res.send({status:201, message: })
-// })
-
-listRouter.get('/', function(req, res) {
-  console.log('getting a GET request for /list/');
+homeRouter.get('/', function(req, res) {
+  console.log('getting a GET request for /home');
   res.send('session created');
 })
+
+var mainRouter = express.Router();
+
+mainRouter.post('/main', query.getList, function(req, res) {
+  console.log('getting a POST request for /main');
+  res.send(res.bars);
+})
+
+mainRouter.get('/main', function(req, res) {
+  console.log('getting a GET request for /main');
+  res.send('session created');
+})
+
 
 var userRouter = express.Router();
 
@@ -106,10 +113,11 @@ menuRouter.post('/', menu.downloadMenu, function(req, res, next) {
 })
 
 // apply routes to application
-app.use('/admin', adminRouter);
-app.use('/list', listRouter);
+app.use('/home', homeRouter);
 app.use('/user', userRouter);
 app.use('/menu', menuRouter);
+app.use('/main', mainRouter);
+app.use('/admin', adminRouter);
 
 app.listen(3000);
 console.log('Listening on 3000...')
