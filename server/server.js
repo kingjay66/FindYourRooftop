@@ -29,6 +29,14 @@ app.use(session({
   saveUninitialized: true
 }));
 
+var adminRouter = express.Router();
+
+adminRouter.post('/', query.postToDB, function(req, res) {
+  console.log('posted suggestion to database!');
+  res.send('posted suggestion to database!');
+  // res.send({status:201, message: })
+})
+
 
 var adminRouter = express.Router();
 
