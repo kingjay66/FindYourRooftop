@@ -17,6 +17,11 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       controller: 'appController',
       templateUrl: 'index2.html'
     })
+    .state('admin', {
+      url: '/admin',
+      controller: 'appController',
+      templateUrl: 'admin.html'
+    })
     //NEED TO INSERT GOOGLE MAPS API
   uiGmapGoogleMapApiProvider.configure({
     key: '',
