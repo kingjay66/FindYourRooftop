@@ -64,18 +64,6 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
   }
  
 
-  // $scope.test = function () {
-  //   console.log('HELLOO TESTING: ' + ref.child('results'))
-  // }
-  $scope.sendSuggestion = function(name, address, description) {
-    return $http({
-      method: 'POST',
-      url: '/admin',
-      data: {restaurant: name, address: address, description: description}
-    })
-  };
-
-
   $scope.sendZipCode  = function(searchParam) {
     // var params = '{enter query}';
     var integers = ['0','1','2','3','4','5','6','7','8','9']
@@ -161,34 +149,23 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
 })
 
 .controller('suggestionController', function($scope, $http) {
-  
-  // $scope.test = "hello";
+    $scope.barData;
+    $scope.sendSuggestion = function(data) {
+    console.log('hELLO????!?!?!')
+    return $http({
+      method: 'POST',
+      url: '/admin',
+      data: data
+    })
+    };
 
-  // $scope.findYelpBar = function(name, city) {
-  //   // var searchParams = JSON.stringify({name: name, limit: 3, location: postal});
-  //   $http({
-  //     method: 'POST',
-  //     url: '/submission',
-  //     headers: {
-  //       "Content-Type": "application/JSON"
-  //     },
-  //     data: {name: name, limit: 3, location: city}
-  //   }).then(function(res) {
-  //     console.log('Marcus inside app.js line 60 hoping to get yelp bar info back');
-  //     console.log('Marcus Right before res.dat in findYelpBar');
-  //     console.log(res.data);
-  //     console.log('Marcus Right after res.dat in findYelpBar');
-  //   })
-  // }
-  
     $scope.findYelpBar = function(name, city) {
     return $http({
       method: 'POST',
       url: '/submission',
-      // headers: {
-      //   "Content-Type": "application/JSON"
-      // },
       data: {term: name, limit: 3, location: city}
+    }).then(function(res) {
+      $scope.barData = res.data
     })
   }
 })

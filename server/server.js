@@ -17,9 +17,6 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/..'));
 app.use(function(req, _, next) {
   console.log('Received a MARCUS ' + req.method + ' for: ' + req.path);
-  console.log("right before yelp test");
-  // test.callYelpApi();
-  console.log("right after yelp test");
   next();
 });
 
@@ -32,22 +29,13 @@ app.use(session({
 var submissionRouter = express.Router();
 
 submissionRouter.post('/', test.callYelpApi, function(req, res) {
-  res.send('posting the list of suggestions')
-  res.send('success!');
+  console.log('res.data is: ' + res.data.displayBars);
+  res.send(res.data);
 })
-
-// var adminRouter = express.Router();
-
-// adminRouter.post('/', query.postToDB, function(req, res) {
-//   console.log('posted suggestion to database!');
-//   res.send('posted suggestion to database!');
-//   // res.send({status:201, message: })
-// })
-
 
 var adminRouter = express.Router();
 
-adminRouter.post('/admin', query.postToDB, function(req, res) {
+adminRouter.post('/', query.postToDB, function(req, res) {
   console.log('posted suggestion to database!');
   res.send('posted suggestion to database!');
   // res.send({status:201, message: })
