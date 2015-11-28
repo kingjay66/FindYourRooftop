@@ -8,12 +8,20 @@ var yelp = new Yelp({
 });
 
 // See http://www.yelp.com/developers/documentation/v2/search_api
-exports.callYelpApi = function(){
-
-  yelp.search({ term: 'misfit', limit: 2, location: 'Santa Monica' })
+exports.callYelpApi = function(req, res){
+  var displayBars =[];
+  var barData =[];
+  // console.log(req.body)
+  // yelp.search(req.body)
+  yelp.search(req.body)
   .then(function (data) {
-    // console.log(data);
-    console.log(data.businesses[0].location);
+    console.log(data)
+    console.log('BUSINESSES ARE ' + data.businesses[0].id)
+    for(var i=0; i < data.businesses.length; i++) {
+      displayBars.push(data.businesses[i].id)
+      barData.push(data.businesses[0])
+    }
+    console.log(displayBars);
   })
   .catch(function (err) {
     console.error(err);
