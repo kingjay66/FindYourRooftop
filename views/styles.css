@@ -1,0 +1,9 @@
+.pending-suggestions {
+  background-color: #cccccc;
+  width:500px;
+  /*border-color:black;*/
+}
+
+.pending-suggestions:hover {
+  cursor:pointer;
+}

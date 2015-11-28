@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html ng-app="WGLR">
-<head>
-  <title>Admin View</title>
+<div ng-controller="approvalController" class="body" ng-init='showSuggestions()'>
+<div class='pending-suggestions' ng-repeat='data in suggestions'>
+<p>Name: {{data.name}}</p>
+<p>Rating: {{data.rating}}/5</p>
+<p>Yelp: <a href='{{data.link}}'>{{data.link}}</a></p>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
-    <link rel="stylesheet" href="bootstrap-andrew-custom.css" >
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="stylish-portfolio.css">
-    <script src="bower_components/lodash/lodash.min.js"></script>
-    <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.14.3.js"></script>
-
-    <script src="client/register/register.js"></script>
-    <script src="client/app.js"></script>
-
-</head>
-<body ng-controller="appController" class="body">
-
-</html>
+<div>
+    <button>Accept</button>
+    <button>Reject</button>
+</div>
+</div>

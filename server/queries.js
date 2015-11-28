@@ -34,8 +34,20 @@ exports.getList = function(req, res, next) {
 	}
 };
 
+exports.getSuggestions = function(req, res, next) {
+	res.sugg = [];
+	suggestedRef.on('value', function(snapshot) {
+		var suggestions = snapshot.val();
+		for(var key in suggestions) {
+			res.sugg.push({name: suggestions[key]['name'], rating: suggestions[key]['rating'], link: suggestions[key]['url']})
+		}
+	}).then(function() {
+		next();
+	})
+	// console.log('what res.sugg has ' + res.sugg[0]['name'] + res.sugg[0]['rating'] + res.sugg[0]['link'])
+}
+
 exports.postToDB = function(req, res, next) {
-	console.log('HI CHELSEA');
 	console.log('blahblah response is: ' + req.body.restaurant)
 	suggestedRef.push(req.body)
 	next();
@@ -179,4 +191,5 @@ exports.addLocation = function(req, res, location, callback) {
 	// 	next();
 	// })
 	// }
+
 

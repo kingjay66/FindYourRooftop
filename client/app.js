@@ -27,6 +27,11 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       controller: 'appController',
       templateUrl: 'admin.html'
     })
+    .state('approve', {
+      url: '/appove',
+      controller: 'approvalController',
+      templateUrl: './views/adminView.html'
+    })
     //NEED TO INSERT GOOGLE MAPS API
   uiGmapGoogleMapApiProvider.configure({
     key: '',
@@ -145,6 +150,19 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
 
   $scope.mapZoom = function(index) {
     $scope.map = {center: { latitude: $scope.list[index].location.coordinate.latitude, longitude: $scope.list[index].location.coordinate.longitude }, zoom: 17 };
+  }
+})
+
+.controller('approvalController', function($scope, $http) {
+  $scope.suggestions;
+  $scope.showSuggestions = function() {
+  return $http({
+    method: 'POST',
+    url: '/approve'
+  }).then(function(res) {
+    console.log('res.data stringified: ' + JSON.stringify(res.data))
+    $scope.suggestions = res.data
+  })
   }
 })
 
