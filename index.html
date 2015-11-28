@@ -22,20 +22,20 @@
 </head>
 <body ng-controller="appController" class="body">
 
-  <div ui-view>
+<div ui-view>
 
 
 <!-- login and signup buttons -->
   <div class="login" >
   <div>
     <!-- change data-ng-show to data-ng-hide if want to hide-->
-    <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="signup">
-      Login
+    <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="suggestions">
+      suggestions?
     </button>
   </div>
   <div>
-    <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ng-click="logout()">
-      Logout
+    <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="adminLogIn">
+      Admin?
     </button>
   </div>
   </div>
@@ -122,7 +122,7 @@
           <ui-gmap-windows show="show">
             <div ng-non-bindable>
               <p><a href={{url}} target="_blank">{{name}}</a></p>
-              <img src={{ratings}} />
+              <!--<img src={{ratings}} />-->
               <p>{{reviewCount}} reviews</p>
             </div>
           </ui-gmap-windows>
@@ -141,13 +141,13 @@
 
      <uib-accordion-heading >
        {{ bar.name }}
-       <img src='{{ bar.rating_img_url}}'>
+       <!--<img src='{{ bar.rating_img_url}}'>-->
      </uib-accordion-heading>
 
     <div class="row">
 
       <div class="">
-         <img src="{{bar.image_url}}" >
+         <!--<img src="{{bar.image_url}}" >-->
       </div >
       <div class="">
         <p class="addressFont ">{{bar.location.address[0]}} <br>
