@@ -75,6 +75,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
     })
   };
 
+
   $scope.sendZipCode  = function(searchParam) {
     // var params = '{enter query}';
     var integers = ['0','1','2','3','4','5','6','7','8','9']
@@ -159,27 +160,37 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
   }
 })
 
-.controller('suggestionController', function($scope) {
+.controller('suggestionController', function($scope, $http) {
   
-  $scope.test = "hello";
+  // $scope.test = "hello";
 
-  $scope.findYelpBar = function(name, city) {
-    // var searchParams = JSON.stringify({name: name, limit: 3, location: postal});
-    $http({
+  // $scope.findYelpBar = function(name, city) {
+  //   // var searchParams = JSON.stringify({name: name, limit: 3, location: postal});
+  //   $http({
+  //     method: 'POST',
+  //     url: '/submission',
+  //     headers: {
+  //       "Content-Type": "application/JSON"
+  //     },
+  //     data: {name: name, limit: 3, location: city}
+  //   }).then(function(res) {
+  //     console.log('Marcus inside app.js line 60 hoping to get yelp bar info back');
+  //     console.log('Marcus Right before res.dat in findYelpBar');
+  //     console.log(res.data);
+  //     console.log('Marcus Right after res.dat in findYelpBar');
+  //   })
+  // }
+  
+    $scope.findYelpBar = function(name, city) {
+    return $http({
       method: 'POST',
-      url: '/menu',
-      headers: {
-        "Content-Type": "application/JSON"
-      },
-      data: {name: name, limit: 3, location: postal}
-    }).then(function(res) {
-      console.log('Marcus inside app.js line 60 hoping to get yelp bar info back');
-      console.log('Marcus Right before res.dat in findYelpBar');
-      console.log(res.data);
-      console.log('Marcus Right after res.dat in findYelpBar');
+      url: '/submission',
+      // headers: {
+      //   "Content-Type": "application/JSON"
+      // },
+      data: {term: name, limit: 3, location: city}
     })
   }
-  
 })
 
 .controller('UibAccordionController', ['$scope', '$attrs', 'uibAccordionConfig', function($scope, $attrs, accordionConfig) {

@@ -18,7 +18,7 @@ app.use(express.static(__dirname + '/..'));
 app.use(function(req, _, next) {
   console.log('Received a MARCUS ' + req.method + ' for: ' + req.path);
   console.log("right before yelp test");
-  test.callYelpApi();
+  // test.callYelpApi();
   console.log("right after yelp test");
   next();
 });
@@ -29,13 +29,20 @@ app.use(session({
   saveUninitialized: true
 }));
 
-var adminRouter = express.Router();
+var submissionRouter = express.Router();
 
-adminRouter.post('/', query.postToDB, function(req, res) {
-  console.log('posted suggestion to database!');
-  res.send('posted suggestion to database!');
-  // res.send({status:201, message: })
+submissionRouter.post('/', test.callYelpApi, function(req, res) {
+  res.send('posting the list of suggestions')
+  res.send('success!');
 })
+
+// var adminRouter = express.Router();
+
+// adminRouter.post('/', query.postToDB, function(req, res) {
+//   console.log('posted suggestion to database!');
+//   res.send('posted suggestion to database!');
+//   // res.send({status:201, message: })
+// })
 
 
 var adminRouter = express.Router();
@@ -57,7 +64,7 @@ homeRouter.post('/', query.getList, function(req, res) {
 homeRouter.get('/', function(req, res) {
   console.log('getting a GET request for /home');
   console.log('about to test yelp api with node');
-  //test.callYelpApi();
+  test.callYelpApi();
   console.log('this is post yelp test');
   res.send('session created');
 })
@@ -116,6 +123,7 @@ menuRouter.post('/', menu.downloadMenu, test.callYelpApi, function(req, res, nex
 })
 
 // apply routes to application
+app.use('/submission', submissionRouter);
 app.use('/home', homeRouter);
 app.use('/user', userRouter);
 app.use('/menu', menuRouter);
