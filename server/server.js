@@ -8,18 +8,18 @@ var query = require('./queries.js');
 var mid = require('./middleware.js');
 var session = require('express-session');
 var http = require('http');
-var menu = require('./findmenu.js')
+var menu = require('./findmenu.js');
+var test = require('./yelp.js');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/..'));
 app.use(function(req, _, next) {
-  console.log('received a ' + req.method + ' for ' + req.path);
-  next();
-})
-app.use(function(req, _, next) {
-  console.log('Received a ' + req.method + ' for: ' + req.path);
+  console.log('Received a MARCUS ' + req.method + ' for: ' + req.path);
+  console.log("right before yelp test");
+  test.callYelpApi();
+  console.log("right after yelp test");
   next();
 });
 
@@ -56,6 +56,9 @@ homeRouter.post('/', query.getList, function(req, res) {
 
 homeRouter.get('/', function(req, res) {
   console.log('getting a GET request for /home');
+  console.log('about to test yelp api with node');
+  //test.callYelpApi();
+  console.log('this is post yelp test');
   res.send('session created');
 })
 
@@ -108,7 +111,7 @@ userRouter.get('/logout', function(req, res) {
 // })
 
 var menuRouter = express.Router();
-menuRouter.post('/', menu.downloadMenu, function(req, res, next) {
+menuRouter.post('/', menu.downloadMenu, test.callYelpApi, function(req, res, next) {
   res.send(res.menu);
 })
 

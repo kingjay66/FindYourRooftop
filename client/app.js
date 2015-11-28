@@ -7,10 +7,15 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       controller: 'appController',
       templateUrl: 'index.html'
     })
-    .state('signup', {
-      url: '/signup',
+    .state('adminLogIn', {
+      url: '/adminLogIn',
       controller: 'formController',
-      templateUrl: './client/register/register.html'
+      templateUrl: './views/adminLogIn.html'
+    })
+    .state('suggestions', {
+      url: '/suggestions',
+      controller: 'suggestionController',
+      templateUrl: './views/suggestions.html'
     })
     .state('main', {
       url: '/main',
@@ -57,7 +62,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       $scope.menu = res.data;
     })
   }
-  console.log('test');
+ 
 
   // $scope.test = function () {
   //   console.log('HELLOO TESTING: ' + ref.child('results'))
@@ -110,7 +115,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
         var reviewCount = $scope.list[key].review_count;
         var url = $scope.list[key].url;
 
-        markers.push({id: key, latitude: latitude, longitude: longitude, name: name, url: url, ratings: ratings, show: false });
+        //markers.push({id: key, latitude: latitude, longitude: longitude, name: name, url: url, ratings: ratings, show: false });
 
 
         markers.push({id: key, latitude: latitude, longitude: longitude, name: name, url: url, ratings: ratings, reviewCount: reviewCount, show: false });
@@ -127,33 +132,26 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       $scope.map = {center: { latitude: avgLat, longitude: avgLong }, zoom: 10 };
       $scope.markerList = markers;
 
-      $scope.onClick = function(marker, eventName, model) {
-        console.log("Clicked!");
-        model.show = !model.show;
-      };
+      // $scope.onClick = function(marker, eventName, model) {
+      //   console.log("Clicked!");
+      //   model.show = !model.show;
+      // };
 
-      uiGmapGoogleMapApi.then(function(maps) {
-        console.log("Working");
-      });
+      // uiGmapGoogleMapApi.then(function(maps) {
+      //   console.log("Working");
+      // });
       //---Google Maps End---
 
     });
   };
 
-  // $scope.test function() {
+  /* $scope.test function() {
 
-  // }
+  }
 
   $scope.logout = function() {
-    $http({
-      method: "GET",
-      url: "user/logout",
-    })
-    .then(function(res) {
-      console.log(res.data);
       $location.path('/signup');
-    })
-  }
+  }*/
 
 
   $scope.mapZoom = function(index) {
@@ -161,31 +159,27 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
   }
 })
 
-.controller('AccordionDemoCtrl', function ($scope) {
-  $scope.oneAtATime = true;
+.controller('suggestionController', function($scope) {
+  
+  $scope.test = "hello";
 
-  // $scope.groups = [
-  //   {
-  //     title: 'Dynamic Group Header - 1',
-  //     content: 'Dynamic Group Body - 1'
-  //   },
-  //   {
-  //     title: 'Dynamic Group Header - 2',
-  //     content: 'Dynamic Group Body - 2'
-  //   }
-  // ];
-
-  // $scope.items = ['Item 1', 'Item 2', 'Item 3'];
-
-  // $scope.addItem = function() {
-  //   var newItemNo = $scope.items.length + 1;
-  //   $scope.items.push('Item ' + newItemNo);
-  // };
-
-  // $scope.status = {
-  //   isFirstOpen: true,
-  //   isFirstDisabled: false
-  // };
+  $scope.findYelpBar = function(name, city) {
+    // var searchParams = JSON.stringify({name: name, limit: 3, location: postal});
+    $http({
+      method: 'POST',
+      url: '/menu',
+      headers: {
+        "Content-Type": "application/JSON"
+      },
+      data: {name: name, limit: 3, location: postal}
+    }).then(function(res) {
+      console.log('Marcus inside app.js line 60 hoping to get yelp bar info back');
+      console.log('Marcus Right before res.dat in findYelpBar');
+      console.log(res.data);
+      console.log('Marcus Right after res.dat in findYelpBar');
+    })
+  }
+  
 })
 
 .controller('UibAccordionController', ['$scope', '$attrs', 'uibAccordionConfig', function($scope, $attrs, accordionConfig) {
