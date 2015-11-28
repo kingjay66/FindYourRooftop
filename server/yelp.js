@@ -8,24 +8,18 @@ var yelp = new Yelp({
 });
 
 // See http://www.yelp.com/developers/documentation/v2/search_api
-exports.callYelpApi = function(req, res){
-  var displayBars =[];
+exports.callYelpApi = function(req, res, next){
   var barData =[];
-  // console.log(req.body)
-  // yelp.search(req.body)
   yelp.search(req.body)
   .then(function (data) {
-    console.log(data)
-    console.log('BUSINESSES ARE ' + data.businesses[0].id)
+    console.log('BUSINESSES ARE ' + data.businesses[0].location.address)
     for(var i=0; i < data.businesses.length; i++) {
-      displayBars.push(data.businesses[i].id)
-      barData.push(data.businesses[0])
+      barData.push(data.businesses[i])
     }
-    console.log(displayBars);
-  })
-  .catch(function (err) {
+    res.data = barData;
+    next();
+  }).catch(function (err) {
     console.error(err);
   });
-
 };
 
