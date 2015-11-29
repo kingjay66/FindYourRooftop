@@ -29,16 +29,30 @@ app.use(session({
 var submissionRouter = express.Router();
 
 submissionRouter.post('/', test.callYelpApi, function(req, res) {
-  console.log('res.data is: ' + res.data.displayBars);
+  // this is here to provide a clearer console.log of the results form YELP
+  console.log('-- results overview --');
+  res.data
+    .map(function(bar) {
+      return {
+        name: bar.name,
+        number: bar.display_phone
+      };
+    })
+    .forEach(function(bar) {
+      console.log(JSON.stringify(bar, null, 2));
+    });
   res.send(res.data);
-})
+});
 
 var adminRouter = express.Router();
 
 adminRouter.post('/', query.postToDB, function(req, res) {
   console.log('posted suggestion to database!');
-  res.send('posted suggestion to database!');
-  // res.send({status:201, message: })
+  // res.send('posted suggestion to database!');
+  res.send(JSON.stringify({
+    status: 201,
+    message: 'posted suggestion to database!'
+  }));
 })
 
 
