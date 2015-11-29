@@ -40,14 +40,15 @@ class Main extends React.Component {
 		this.setState({
 			isLoading: true
 		});
-		api.getResults()
+		api.queryResults(this.state.searchQuery)
 			.then(res => {
 				if(!res) {
 					this.setState({
 						isLoading: false,
 						error: 'No results found.'
 					});
-				} else {
+				} 
+				else {
 					this.props.navigator.push({
 						title: res.name || 'Results',
 						component: BarResults,

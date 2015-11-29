@@ -1,6 +1,7 @@
 const React = require('react-native');
 
 const {
+	AlertIOS,
 	View,
 	Text,
 	TextInput,
@@ -11,6 +12,7 @@ const {
 // external modules
 const api = require('../Utils/api.js');
 // external Components
+const YelpResults = require('./YelpResults.js');
 
 class SuggestionForm extends React.Component {
 	constructor(props) {
@@ -27,8 +29,12 @@ class SuggestionForm extends React.Component {
 			name,
 			location
 		})
-		.then((results) => {
-			AlertIOS.alert('Yelp!', JSON.stringify(results, null, 2));
+		.then(results => {
+			this.props.navigator.push({
+				component: YelpResults,
+				title: 'Select Bar',
+				passProps: {results}
+			});
 		});
 	}
 	handleNameChange(e) {
