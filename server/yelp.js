@@ -10,6 +10,7 @@ var yelp = new Yelp({
 // See http://www.yelp.com/developers/documentation/v2/search_api
 exports.callYelpApi = function(req, res, next){
   var barData =[];
+  console.log('yelp.js -- req.body: ' + JSON.stringify(req.body, null, 2));
   yelp.search(req.body)
   .then(function (data) {
     console.log('BUSINESSES ARE ' + data.businesses[0].location.address)

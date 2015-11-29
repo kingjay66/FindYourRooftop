@@ -36,7 +36,7 @@ exports.getList = function(req, res, next) {
 
 exports.postToDB = function(req, res, next) {
 	console.log('HI CHELSEA');
-	console.log('blahblah response is: ' + req.body.restaurant)
+	console.log('blahblah response is: ' + JSON.stringify(req.body, null, 2));
 	suggestedRef.push(req.body)
 	next();
 }
