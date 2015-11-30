@@ -28,7 +28,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       templateUrl: 'admin.html'
     })
     .state('approve', {
-      url: '/appove',
+      url: '/approve',
       controller: 'approvalController',
       templateUrl: './views/adminView.html'
     })
@@ -153,8 +153,10 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
   }
 })
 
+
 .controller('approvalController', function($scope, $http) {
   $scope.suggestions;
+  $scope.id;
   $scope.showSuggestions = function() {
   return $http({
     method: 'POST',
@@ -164,6 +166,45 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
     $scope.suggestions = res.data
   })
   }
+
+  $scope.changeColor = function(context, id, data) {
+    if(data.clicked) {
+      data.clicked = false;
+    } else {
+    data.clicked = true;
+    }
+  }
+
+  $scope.filterTrue = function () {
+    var newArray = []
+    for(var i = 0; i < $scope.suggestions.length; i++) {
+      if($scope.suggestions[i].clicked) {
+        newArray.push($scope.suggestions[i].name);
+      }
+    }
+    return newArray;
+  }
+
+  $scope.rejectSubmission = function () {
+    var restaurantsTrue = $scope.filterTrue()
+    console.log('restaurantsTrue is: ' + restaurantsTrue);
+    return $http({
+      method: 'POST',
+      url: '/reject',
+      data: restaurantsTrue
+    })
+  }
+
+  $scope.acceptSubmission = function () {
+    var restaurantsTrue = $scope.filterTrue();
+    console.log('restaurantsTrue is: ' + restaurantsTrue);
+    return $http({
+      method: 'POST',
+      url:'/accept',
+      data: restaurantsTrue
+    })
+  }
+
 })
 
 .controller('suggestionController', function($scope, $http) {
@@ -187,42 +228,3 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
     })
   }
 })
-
-.controller('UibAccordionController', ['$scope', '$attrs', 'uibAccordionConfig', function($scope, $attrs, accordionConfig) {
-  // This array keeps track of the accordion groups
-  this.groups = [];
-
-  // Ensure that all the groups in this accordion are closed, unless close-others explicitly says not to
-  this.closeOthers = function(openGroup) {
-    var closeOthers = angular.isDefined($attrs.closeOthers) ?
-      $scope.$eval($attrs.closeOthers) : accordionConfig.closeOthers;
-    if (closeOthers) {
-      angular.forEach(this.groups, function(group) {
-        if (group !== openGroup) {
-          group.isOpen = false;
-        }
-      });
-    }
-  };
-
-  // This is called from the accordion-group directive to add itself to the accordion
-  this.addGroup = function(groupScope) {
-    var that = this;
-    this.groups.push(groupScope);
-
-    groupScope.$on('$destroy', function(event) {
-      that.removeGroup(groupScope);
-    });
-  };
-
-  // This is called from the accordion-group directive when to remove itself
-  this.removeGroup = function(group) {
-    var index = this.groups.indexOf(group);
-    if (index !== -1) {
-      this.groups.splice(index, 1);
-    }
-  };
-}])
-
-
-

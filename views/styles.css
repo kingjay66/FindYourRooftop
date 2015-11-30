@@ -1,9 +1,33 @@
-.pending-suggestions {
-  background-color: #cccccc;
-  width:500px;
-  /*border-color:black;*/
+a {
+  text-decoration:none;
+  color:white;
 }
 
-.pending-suggestions:hover {
+a:hover {
+  color:#cccccc;
+}
+
+/*.pending-false {
+  background-color: #76896e;
+  width:500px;
+}*/
+
+#true {
+  background-color:#4c5847;
+  width:500px;
+}
+
+#false {
+  background-color:#76896e;
+}
+
+.suggestion-boxes:hover {
   cursor:pointer;
+}
+
+.suggestion-boxes {
+  background-color:#76896e;
+  width:500px;
+  font-weight:bold;
+  color:#ebebe3;
 }

@@ -8,6 +8,7 @@ var usersRef = fireproof.child('users');
 //note: use 'results' for now. expect to change to 'curated' in final db
 var curatedRef = fireproof.child('results');
 var suggestedRef = fireproof.child('suggestions')
+var testingRef = fireproof.child('Testing');
 
 // search queries
 exports.getList = function(req, res, next) {
@@ -33,6 +34,40 @@ exports.getList = function(req, res, next) {
 		console.log('PLEASE ENTER A CITY OR ZIP CODE');
 	}
 };
+
+exports.deleteSuggestions = function(req, res, next) {
+	suggestedRef.on('value', function(snapshot) {
+		var suggestions = snapshot.val();
+		for(var i = 0; i < req.body.length; i++) {
+			for(var key in suggestions) {
+				// console.log('right before if statement, suggestions[key] is ' + suggestions[key].name)
+				if(req.body[i] === suggestions[key].name) {
+					// console.log(req.body[i] + ' is equal to ' + suggestions[key].name )
+					suggestedRef.child(key).remove();
+					console.log(JSON.stringify(suggestions));
+				}
+			}
+		}
+	})
+	// console.log('req body is : ' + req.body)
+	// console.log('in deleteSuggestions');
+	// testingRef.child('a').remove();
+}
+
+exports.approveSuggestions = function(req, res, next) {
+	var suggestions;
+	var temp;
+	testingRef.on('value', function(snapshot) {
+	suggestions = snapshot.val();
+	console.log('suggestions b ' + JSON.stringify(suggestions.b));
+	temp = suggestions.b
+	}).then(function () {
+		console.log('temp is ' + JSON.stringify(temp))
+		curatedRef.push(temp);
+		// testingRef.child('b').remove();
+		next();
+	})
+}
 
 exports.getSuggestions = function(req, res, next) {
 	res.sugg = [];

@@ -1,12 +1,16 @@
-<div ng-controller="approvalController" class="body" ng-init='showSuggestions()'>
-<div class='pending-suggestions' ng-repeat='data in suggestions'>
-<p>Name: {{data.name}}</p>
-<p>Rating: {{data.rating}}/5</p>
-<p>Yelp: <a href='{{data.link}}'>{{data.link}}</a></p>
+<div ng-controller='approvalController' class='body' ng-init='showSuggestions()'>
+<div ng-repeat='data in suggestions'>
+    <div class='suggestion-boxes' id='{{data.clicked}}' ng-click='changeColor($index, data.name, data)'>
+    <div>
+    <p>Name: {{data.name}}</p>
+    <p>Rating: {{data.rating}}/5</p>
+    <p>Yelp: <a id='link' href='{{data.link}}'>{{data.link}}</a></p>
+    </div>
+    </div>
 </div>
 
 <div>
-    <button>Accept</button>
-    <button>Reject</button>
+    <button ng-click='acceptSubmission()'>Accept</button>
+    <button ng-click='rejectSubmission()'>Reject</button>
 </div>
 </div>

@@ -26,6 +26,18 @@ app.use(session({
   saveUninitialized: true
 }));
 
+var acceptRouter = express.Router();
+acceptRouter.post('/', query.approveSuggestions, function (req, res) {
+  console.log('Accepted suggestions');
+  res.send('Accepted suggestions')
+})
+
+var rejectRouter= express.Router();
+rejectRouter.post('/', query.deleteSuggestions, function (req, res) {
+  console.log('Deleted suggestions');
+  res.send('Deleted suggestions');
+})
+
 var approveRouter = express.Router();
 
 approveRouter.post('/', query.getSuggestions, function(req, res) {
@@ -120,6 +132,8 @@ menuRouter.post('/', menu.downloadMenu, test.callYelpApi, function(req, res, nex
 })
 
 // apply routes to application
+app.use('/reject', rejectRouter);
+app.use('/accept', acceptRouter);
 app.use('/approve', approveRouter);
 app.use('/submission', submissionRouter);
 app.use('/home', homeRouter);

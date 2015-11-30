@@ -31,12 +31,10 @@
   <div>
     <!-- change data-ng-show to data-ng-hide if want to hide-->
     <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="suggestions">
-      suggestions?
+      SUGGESTIONS
     </button>
-  </div>
-  <div>
     <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="approve">
-      Admin?
+      ADMIN
     </button>
   </div>
   </div>
@@ -59,7 +57,7 @@
               <input type="text" class="form-control input-lg text-center" placeholder="type in a city or zipcode" ng-model="zipCode">
             </div>
             <br>
-            <button type="submit" class="btn btn-primary btn-lg" ng-click="sendZipCode(zipCode); showDetails = true" > Get me to a roof </button>
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="sendZipCode(zipCode); showDetails = true" > Get me to a roof! </button>
           </form>
           <br>
       </div>
