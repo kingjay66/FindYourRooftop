@@ -49,7 +49,7 @@ const api = {
 		let data = {
 			term: suggestion.name,
 			location: suggestion.location,
-			limit: 3
+			limit: 6
 		};
 		return fetch(url, {
 			  method: 'post',

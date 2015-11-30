@@ -11,6 +11,7 @@ const {
 } = React;
 
 // external Modules / Components
+const STYLES = require('./Helpers/styles.js');
 const api = require('../Utils/api.js');
 const BarResults = require('./BarResults.js');
 const SuggestionForm = require('./SuggestionForm.js');
@@ -50,7 +51,7 @@ class Main extends React.Component {
 				} 
 				else {
 					this.props.navigator.push({
-						title: res.name || 'Results',
+						title: `${res.length} results`,
 						component: BarResults,
 						passProps: {results: res}
 					});
@@ -83,10 +84,12 @@ class Main extends React.Component {
 						SEARCH
 					</Text>
 				</TouchableHighlight>
-				<ActivityIndicatorIOS
-					animating={this.state.isLoading}
-					color="#111"
-					size="large" />
+				<View style={styles.spinner}>
+					<ActivityIndicatorIOS
+						animating={this.state.isLoading}
+						color="#111"
+						size="large" />
+				</View>
 				{showError}
 				<TouchableHighlight
 					style={styles.button}
@@ -106,7 +109,7 @@ let styles = StyleSheet.create({
 		marginTop: 55,
 		flexDirection: 'column',
 		justifyContent: 'center',
-		backgroundColor: '#48BBEC'
+		backgroundColor: STYLES.primaryColor
 	},
 	title: {
 		marginBottom: 20,
@@ -123,6 +126,10 @@ let styles = StyleSheet.create({
 		borderColor: '#FFF',
 		borderRadius: 8,
 		color: '#FFF'
+	},
+	spinner: {
+		flexDirection: 'row',
+		justifyContent: 'center'
 	},
 	button: {
 		height: 45,
