@@ -1,3 +1,4 @@
+
 var fire = require('firebase');
 var Fireproof = require('fireproof');
 var Promise = require('bluebird');
@@ -260,3 +261,4 @@ exports.addLocation = function(req, res, location, callback) {
 	// 	next();
 	// })
 	// }
+
