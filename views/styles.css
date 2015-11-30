@@ -1,0 +1,61 @@
+@font-face {
+  font-family:Gotham-Book;
+  url:('./Gotham-Book.ttf');
+}
+a {
+  text-decoration:none;
+  color:black;
+}
+
+body {
+  font-family:Gotham-Book;
+  /*background-img:#f4f5d9;*/
+  background-image: url('adminview-background.png');
+}
+
+a:hover {
+  color:#cccccc;
+}
+
+.buttons {
+  width:90px;
+  height:35px;
+  font-size:16px;
+  border-width:2px;
+  border-style:solid;
+  border-color:black;
+  color:black;
+  background:none;
+}
+
+#admin-view {
+  margin-top:50px;
+  margin: 0 auto;
+  width:500px;
+  text-align:center;
+  vertical-align:middle;
+}
+
+#true {
+  /*background-color:#4c5847;*/
+  background-color:#b6b6b6;
+}
+
+#false {
+  /*background-color:#76896e;*/
+  background-color:white;
+}
+
+.suggestion-boxes:hover {
+  cursor:pointer;
+}
+
+.suggestion-boxes {
+  /*margin-top:px;*/
+  /*background-color:#76896e;*/
+  background-color:white;
+  width:500px;
+  font-weight:bold;
+  /*color:#ebebe3;*/
+  color:black;
+}
