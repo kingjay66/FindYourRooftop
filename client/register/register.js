@@ -44,6 +44,7 @@ angular.module('register', [])
 	$scope.submitSignup = function(email, pass) {
 		$scope.email = '';
 		$scope.pass = '';
+		// $scope.role = 10;
 		$http({
 			method: "POST",
 			url: "/user/signup",

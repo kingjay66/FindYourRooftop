@@ -26,9 +26,9 @@
 
 
 <!-- login and signup buttons -->
-  <div class="login" >
-  <div>
     <!-- change data-ng-show to data-ng-hide if want to hide-->
+  <!-- <div class="login" >
+  <div>
     <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="suggestions">
       suggestions?
     </button>
@@ -38,6 +38,18 @@
       Admin?
     </button>
   </div>
+  </div>
+ -->
+  <!-- login and signup buttons -->
+  <div class="login">
+    <button type="button" class="btn btn-primary"  ui-sref="signup">
+      Login
+    </button>
+  </div>
+  <div class="login">
+    <button type="button" class="btn btn-primary" ng-click="logout()">
+      Logout
+    </button>
   </div>
 
 
