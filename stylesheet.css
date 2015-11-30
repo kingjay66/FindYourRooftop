@@ -93,10 +93,10 @@
  float: right;
  height: 400px;
  width: 400px;
- right: 0px;  
+ right: 0px;
  bottom: -10px;
  position: fixed;
-} 
+}
 
 .hero__content-footer {
   background: url('banner-background-2.png');
