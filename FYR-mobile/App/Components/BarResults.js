@@ -12,6 +12,7 @@ const {
 
 // external Components
 const Separator = require('./Helpers/Separator.js');
+const STYLES = require('./Helpers/styles.js');
 const Web = require('./Helpers/Web.js');
 
 class BarResults extends React.Component {
@@ -69,7 +70,6 @@ class BarResults extends React.Component {
 		});
 		return (
 			<View style={styles.container}>
-				<Text>{this.props.results.length} results</Text>
 				<ScrollView>
 					{results}
 				</ScrollView>
@@ -111,7 +111,7 @@ let styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 14,
-		color: '#F83947',
+		color: STYLES.primaryColor,
 		justifyContent: 'center',
 		fontWeight: 'bold'
 	},

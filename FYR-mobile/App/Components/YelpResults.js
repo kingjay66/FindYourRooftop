@@ -12,6 +12,7 @@ const {
 
 // Utils...
 const api = require('../Utils/api.js');
+const STYLES = require('./Helpers/styles.js');
 // external Components
 // let Main = require('./Main.js'); // lazy loading below
 const Separator = require('./Helpers/Separator.js');
@@ -116,7 +117,7 @@ let styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 14,
-		color: '#F83947',
+		color: STYLES.primaryColor,
 		justifyContent: 'center',
 		fontWeight: 'bold'
 	},

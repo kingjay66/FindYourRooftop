@@ -2,6 +2,7 @@ const React = require('react-native');
 
 const {
 	AlertIOS,
+	ActivityIndicatorIOS,
 	View,
 	Text,
 	TextInput,
@@ -11,6 +12,7 @@ const {
 
 // external modules
 const api = require('../Utils/api.js');
+const STYLES = require('./Helpers/styles.js');
 // external Components
 const YelpResults = require('./YelpResults.js');
 
@@ -19,10 +21,18 @@ class SuggestionForm extends React.Component {
 		super(props);
 		this.state = {
 			barName: '',
-			barLocation: ''
+			barLocation: '',
+			isLoading: false
 		};
 	}
 	handleSubmit() {
+		// cache barName for the title of the next navigator
+		let barName = this.state.barName;
+		this.setState({
+			barName: '',
+			barLocation: '',
+			isLoading: true
+		});
 		let name = this.state.barName.toLowerCase().trim();
 		let location = this.state.barLocation.toLowerCase().trim();
 		api.addSuggestion({
@@ -30,9 +40,10 @@ class SuggestionForm extends React.Component {
 			location
 		})
 		.then(results => {
+			this.setState({isLoading: false});
 			this.props.navigator.push({
 				component: YelpResults,
-				title: 'Select Bar',
+				title: `Which "${barName}"?`,
 				passProps: {results}
 			});
 		});
@@ -79,6 +90,12 @@ class SuggestionForm extends React.Component {
 						SUBMIT
 					</Text>
 				</TouchableHighlight>
+				<View style={styles.spinner}>
+					<ActivityIndicatorIOS
+						animating={this.state.isLoading}
+						color="#111"
+						size="large" />
+				</View>
 			</View>
 		);
 	}
@@ -90,7 +107,7 @@ let styles = StyleSheet.create({
 		marginTop: 55,
 		flexDirection: 'column',
 		justifyContent: 'center',
-		backgroundColor: '#48BBEC'
+		backgroundColor: STYLES.primaryColor
 	},
 	title: {
 		marginBottom: 10,
@@ -108,6 +125,10 @@ let styles = StyleSheet.create({
 		marginBottom: 10,
 		marginTop: 10,
 		alignSelf: 'stretch',
+		justifyContent: 'center'
+	},
+	spinner: {
+		flexDirection: 'row',
 		justifyContent: 'center'
 	},
 	textInput: {
