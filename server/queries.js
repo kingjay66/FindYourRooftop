@@ -90,6 +90,8 @@ exports.approveSuggestions = function(req, res, next) {
 	next();
 }
 
+
+
 exports.getSuggestions = function(req, res, next) {
 	res.sugg = [];
 	suggestedRef.on('value', function(snapshot) {
