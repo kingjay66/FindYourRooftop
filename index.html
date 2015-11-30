@@ -35,16 +35,16 @@
     <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="suggestions">
       SUGGESTIONS
     </button>
-    <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="approve">
+<!--     <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="approve">
       ADMIN
     </button>
 
     <button type="button" class="btn btn-primary"  ui-sref="signup">
-     Login
-    </button>
+     LOGIN
+    </button> -->
 
     <button type="button" class="btn btn-primary" ng-click="logout()">
-     Logout
+     LOGOUT
     </button>
   </div>
   </div>
@@ -63,13 +63,11 @@
 
       <div class="col-lg-12  text-center" >
           <form>
-            <div>
-              <input type="text" class="form-control input-lg text-center" placeholder="type in a city or zipcode" ng-model="zipCode">
+            <div id='div2'>
+              <input id='zipcode' type="text" class="form-control input-lg text-center" placeholder="type in a city or zipcode" ng-model="zipCode">
+            <button id='get-to-rooftop' type="submit" class="btn btn-primary btn-lg" ng-click="sendZipCode(zipCode); showDetails = true" > Get me to a roof! </button>
             </div>
-            <br>
-            <button type="submit" class="btn btn-primary btn-lg" ng-click="sendZipCode(zipCode); showDetails = true" > Get me to a roof! </button>
           </form>
-          <br>
       </div>
       <br>
 
@@ -150,13 +148,13 @@
 
      <uib-accordion-heading >
        {{ bar.name }}
-       <!--<img src='{{ bar.rating_img_url}}'>-->
+       <img src='{{ bar.rating_img_url}}'>
      </uib-accordion-heading>
 
     <div class="row">
 
       <div class="">
-         <!--<img src="{{bar.image_url}}" >-->
+         <img src="{{bar.image_url}}" >
       </div >
       <div class="">
         <p class="addressFont ">{{bar.location.address[0]}} <br>
@@ -165,7 +163,7 @@
         {{bar.location.postal_code}} <br>
         {{bar.display_phone}}
         </p>
-         <button type="button" class="btn btn-sm btn-warning" ng-if="!bar.showLink"  ng-click="findMenu(bar.name, bar.location.postal_code); bar.showLink=true" >Menu</button>
+         <button type="button" id='menu-button' class="btn btn-sm btn-warning" ng-if="!bar.showLink"  ng-click="findMenu(bar.name, bar.location.postal_code); bar.showLink=true" >Menu</button>
       <!--  <div ng-if='bar.showLink'> -->
          <a ng-if='bar.showLink' class="btn btn-sm btn-warning" href="{{menu.venues[0].website_url}}" target="popup" onclick="window.open(menu.venues[0].website_url,'name','width=600,height=400')">Menu</a>
 

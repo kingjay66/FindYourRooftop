@@ -1,18 +1,18 @@
 <body ng-controller="suggestionController">
   <header id="top" class="header">
     <div class="text-vertical-center btn btn-dark btn-lg">
-      <h1>Bar Suggestion?</h1>
+      <div id='have-a'>Have a Suggestion?</div>
       <br>
       <form class="form-signin left">
-        <h2 class="form-signin-heading">Fill out the details</h2>
+        <div id='fill-out'>Fill out the details</div>
         <input type="text" id="inputEstName" class="form-control" placeholder="Name of Establishment" ng-model="estName" required autofocus>
         <input type="text" id="inputCity" class="form-control" placeholder="City" ng-model="estCity" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="findYelpBar(estName, estCity)">Search</button>
+        <button id='search-button' class="btn btn-lg btn-primary btn-block" type="submit" ng-click="findYelpBar(estName, estCity)">Search</button>
       </form>
       <div id='add-suggestion-form'>
       <div>Which one did you mean?</div>
       <div ng-repeat='data in barData'</div>
-      <div>
+      <div id='add-results'>
       <div>Restaurant: {{data.name}}</div>
       <div>Address: {{data.location.address[0]}}</div>
       <button class='add-suggestion' type='submit' ng-click='sendSuggestion(data)'>Add</button>

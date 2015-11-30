@@ -231,6 +231,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
   }
 
   $scope.rejectSubmission = function () {
+    $('#true').remove();
     var restaurantsTrue = $scope.filterTrue()
     console.log('restaurantsTrue is: ' + restaurantsTrue);
     return $http({
@@ -238,6 +239,11 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       url: '/reject',
       data: restaurantsTrue
     })
+      // $scope.$apply(function(){
+      //   for(var i=0; i < restaurantsTrue.length; i++)
+      //     $scope.suggestions.splice($scope.suggestions.indexOf(restaurantsTrue[j]),1);
+      // })
+    // })
   }
 
   $scope.acceptSubmission = function () {
@@ -247,7 +253,15 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       method: 'POST',
       url:'/accept',
       data: restaurantsTrue
+    }).then(function() {
+      $('#true').remove();
     })
+    // for(var j = 0; j < restaurantsTrue.length; j++ ){
+    //   $scope.suggestions.splice($scope.suggestions.indexOf(restaurantsTrue[j]),1);
+    // }
+
+    
+
   }
 
 })
@@ -260,6 +274,10 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       method: 'POST',
       url: '/admin',
       data: data
+    }).then(function() {
+    $('#inputEstName').val('');
+    $('#inputCity').val('');
+    $('#add-suggestion-form').remove();
     })
     };
 
