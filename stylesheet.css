@@ -13,6 +13,33 @@
   src:url('Gotham-Book.ttf');
 }
 
+#add-results {
+  margin-top: 10px;
+  /*width:500px;*/
+/*  border-style:solid;
+  border-color:white;*/
+  /*width:400px;*/
+  /*margin: 0 auto;*/
+}
+
+#have-a {
+  font-family:Market_Deco;
+  font-size:40px;
+}
+
+#fill-out {
+  font-size:24px;
+}
+
+#menu-button {
+  background-color:#cccccc;
+}
+
+.body {
+  background-color:white;
+  background-image:none;
+}
+
 .bg {
   background: url('fyr-banner-2.png') no-repeat center center;
   position: fixed;
@@ -23,8 +50,9 @@
   z-index: -1;
 }
 
+
 .input-lg {
-  margin-left:27%;
+  /*margin-left:27%;*/
   width:500px;
 }
 
@@ -68,6 +96,25 @@
   margin: 130px;
 }
 
+/*#div2 {
+  margin-left:20px;
+}*/
+
+#zipcode {
+  display:inline-block;
+  border-color:black;
+  border-radius:0px;
+}
+
+#get-to-rooftop {
+  text-align:center;
+  width:180px;
+  display:inline-block;
+  color:black;
+  border-style:black;
+  border-color:black;
+}
+
 .angular-google-map-container {
  float: right;
  height: 400px;
@@ -78,8 +125,11 @@
 }
 
 .hero__content-footer {
-  background: url('banner-background-2.png');
+  /*background: url('banner-background-2.png');*/
+
+  /*background-color:#bababa;*/
   /*background-color:#white;*/
+  background-color:white;
   top: -35px;
   bottom: -10px;
   left: 0;
