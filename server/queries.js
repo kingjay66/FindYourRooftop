@@ -74,20 +74,21 @@ exports.approveSuggestions = function(req, res, next) {
 			}
 		}
 	}
-	}).then(function () {
-		suggestedRef.on('value', function(snapshot) {
-		var suggestions = snapshot.val();
-		for(var key in suggestions) {
-		for(var i=0; i < req.body.length; i++) {
-			if(req.body[i] === suggestions[key].name) {
-				console.log('req.body[i] is ' + req.body[i] + ' suggestions is ' + suggestions[key].name)
-				suggestedRef.child(key).remove();
-			}
-		}
-	}
-	})
-	})
 	next();
+	})
+	// .then(function () {
+	// 	suggestedRef.on('value', function(snapshot) {
+	// 	var suggestions = snapshot.val();
+	// 	for(var key in suggestions) {
+	// 	for(var i=0; i < req.body.length; i++) {
+	// 		if(req.body[i] === suggestions[key].name) {
+	// 			console.log('req.body[i] is ' + req.body[i] + ' suggestions is ' + suggestions[key].name)
+	// 			suggestedRef.child(key).remove();
+	// 		}
+	// 	}
+	// }
+	// })
+	// })
 }
 
 
