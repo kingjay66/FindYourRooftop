@@ -52,6 +52,7 @@ exports.deleteSuggestions = function(req, res, next) {
 			for(var i=0; i < req.body.length; i++) {
 				if(req.body[i] === suggestions[key].name) {
 					suggestedRef.child(key).remove();
+					console.log('some bogus log');
 				}
 			}
 		}
