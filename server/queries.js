@@ -46,7 +46,7 @@ exports.deleteSuggestions = function(req, res, next) {
 		// 		}
 		// 	}
 		// }
-
+    // arg git flow!!!
 		//BUT WHY DOES THIS WORK!!
 		for(var key in suggestions) {
 			for(var i=0; i < req.body.length; i++) {
