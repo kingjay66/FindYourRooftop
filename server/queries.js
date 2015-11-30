@@ -34,12 +34,91 @@ exports.getList = function(req, res, next) {
 	}
 };
 
+exports.deleteSuggestions = function(req, res, next) {
+	suggestedRef.on('value', function(snapshot) {
+		var suggestions = snapshot.val();
+		//why does this not work
+		// for(var i = 0; i < req.body.length; i++) {
+		// 	for(var key in suggestions) {
+		// 		if(req.body[i] === suggestions[key].name) {
+		// 			suggestedRef.child(key).remove();
+		// 		}
+		// 	}
+		// }
+
+		//BUT WHY DOES THIS WORK!!
+		for(var key in suggestions) {
+			for(var i=0; i < req.body.length; i++) {
+				if(req.body[i] === suggestions[key].name) {
+					suggestedRef.child(key).remove();
+				}
+			}
+		}
+	})
+	next();
+}
+
+exports.approveSuggestions = function(req, res, next) {
+	console.log('req.body is ' + req.body);
+	var suggestions;
+	var temp = [];
+	suggestedRef.on('value', function(snapshot) {
+	suggestions = snapshot.val();
+	for(var key in suggestions) {
+		for(var i=0; i < req.body.length; i++) {
+			if(req.body[i] === suggestions[key].name) {
+				console.log('req.body[i] is ' + req.body[i] + ' suggestions is ' + suggestions[key].name)
+				curatedRef.push(suggestions[key]);
+				// suggestedRef.child(key).remove();
+			}
+		}
+	}
+	next();
+	})
+	// .then(function () {
+	// 	suggestedRef.on('value', function(snapshot) {
+	// 	var suggestions = snapshot.val();
+	// 	for(var key in suggestions) {
+	// 	for(var i=0; i < req.body.length; i++) {
+	// 		if(req.body[i] === suggestions[key].name) {
+	// 			console.log('req.body[i] is ' + req.body[i] + ' suggestions is ' + suggestions[key].name)
+	// 			suggestedRef.child(key).remove();
+	// 		}
+	// 	}
+	// }
+	// })
+	// })
+}
+
+
+
+exports.getSuggestions = function(req, res, next) {
+	res.sugg = [];
+	suggestedRef.on('value', function(snapshot) {
+		var suggestions = snapshot.val();
+		for(var key in suggestions) {
+			res.sugg.push({name: suggestions[key]['name'], rating: suggestions[key]['rating'], link: suggestions[key]['url']})
+		}
+	}).then(function() {
+		next();
+	})
+	// console.log('what res.sugg has ' + res.sugg[0]['name'] + res.sugg[0]['rating'] + res.sugg[0]['link'])
+}
+
 exports.postToDB = function(req, res, next) {
-	console.log('HI CHELSEA');
-	console.log('blahblah response is: ' + JSON.stringify(req.body, null, 2));
+	console.log('req.body is ' + JSON.stringify(req.body))
+	console.log('blahblah response is: ' + req.body.name)
 	suggestedRef.push(req.body)
 	next();
 }
+
+
+// exports.postToDB = function(req, res, next) {
+// 	console.log('HI CHELSEA');
+// 	console.log('blahblah response is: ' + JSON.stringify(req.body, null, 2));
+// 	suggestedRef.push(req.body)
+// 	next();
+// }
 
 // helper for getList^
 function queryDB(req, res, next, searchParam, queryParam) {
