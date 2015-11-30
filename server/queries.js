@@ -8,6 +8,7 @@ var usersRef = fireproof.child('users');
 //note: use 'results' for now. expect to change to 'curated' in final db
 var curatedRef = fireproof.child('results');
 var suggestedRef = fireproof.child('suggestions')
+var testingRef = fireproof.child('Testing');
 
 // search queries
 exports.getList = function(req, res, next) {
@@ -89,8 +90,6 @@ exports.approveSuggestions = function(req, res, next) {
 	// })
 	// })
 }
-
-
 
 exports.getSuggestions = function(req, res, next) {
 	res.sugg = [];

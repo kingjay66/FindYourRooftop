@@ -10,7 +10,7 @@ a {
 body {
   font-family:Gotham-Book;
   /*background-img:#f4f5d9;*/
-  /*background-image: url('adminview-background.png');*/
+  background-image: url('adminview-background.png');
 }
 
 a:hover {

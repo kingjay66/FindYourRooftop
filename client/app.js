@@ -201,6 +201,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
 
 .controller('approvalController', function($scope, $http) {
   $scope.suggestions;
+  $scope.id;
   $scope.showSuggestions = function() {
   return $http({
     method: 'POST',
@@ -248,6 +249,7 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       data: restaurantsTrue
     })
   }
+
 })
 
 .controller('suggestionController', function($scope, $http) {
