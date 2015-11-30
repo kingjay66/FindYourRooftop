@@ -78,13 +78,17 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
 
 //   // $scope.findMenu();
 // })
-app.run(function ($rootScope, $location, session, $timeout) {
-  $rootScope.$on("$routeChangeStart", function (event, next, current) {
-    if (!Session.isUserLoggedIn()) {
-          $location.path('/signup');
-      }
-    })
-  }
+// app.run(function ($rootScope, $location, session, $timeout) {
+//   $rootScope.$on("$routeChangeStart", function (event, next, current) {
+//     if (!Session.isUserLoggedIn()) {
+//           $location.path('/signup');
+//       }
+//     })
+//   }
+// .controller('menuController', function($scope, $http) {
+
+//   // $scope.findMenu();
+// })
 
 .controller('appController', function($scope, $http, $location, uiGmapGoogleMapApi) {
 
@@ -115,9 +119,9 @@ app.run(function ($rootScope, $location, session, $timeout) {
     var integers = ['0','1','2','3','4','5','6','7','8','9']
     var data;
     if(integers.indexOf(searchParam[0]) >= 0) {
-    	data = {zipCode: searchParam};
+      data = {zipCode: searchParam};
     } else {
-    	data = {city: searchParam};
+      data = {city: searchParam};
     }
     console.log('inside app.js $scope.sendZipCode');
     console.log(data);
@@ -194,63 +198,6 @@ app.run(function ($rootScope, $location, session, $timeout) {
   }
 })
 
-.controller('suggestionController', function($scope, $http) {
-    $scope.barData;
-    $scope.sendSuggestion = function(data) {
-    console.log('hELLO????!?!?!')
-    return $http({
-      method: 'POST',
-      url: '/admin',
-      data: data
-    })
-    };
-
-    $scope.findYelpBar = function(name, city) {
-    return $http({
-      method: 'POST',
-      url: '/submission',
-      data: {term: name, limit: 3, location: city}
-    }).then(function(res) {
-      $scope.barData = res.data
-    })
-  }
-})
-
-.controller('UibAccordionController', ['$scope', '$attrs', 'uibAccordionConfig', function($scope, $attrs, accordionConfig) {
-  // This array keeps track of the accordion groups
-  this.groups = [];
-
-  // Ensure that all the groups in this accordion are closed, unless close-others explicitly says not to
-  this.closeOthers = function(openGroup) {
-    var closeOthers = angular.isDefined($attrs.closeOthers) ?
-      $scope.$eval($attrs.closeOthers) : accordionConfig.closeOthers;
-    if (closeOthers) {
-      angular.forEach(this.groups, function(group) {
-        if (group !== openGroup) {
-          group.isOpen = false;
-        }
-      });
-    }
-  };
-
-  // This is called from the accordion-group directive to add itself to the accordion
-  this.addGroup = function(groupScope) {
-    var that = this;
-    this.groups.push(groupScope);
-
-    groupScope.$on('$destroy', function(event) {
-      that.removeGroup(groupScope);
-    });
-  };
-
-  // This is called from the accordion-group directive when to remove itself
-  this.removeGroup = function(group) {
-    var index = this.groups.indexOf(group);
-    if (index !== -1) {
-      this.groups.splice(index, 1);
-    }
-  };
-}])
 
 .controller('approvalController', function($scope, $http) {
   $scope.suggestions;
@@ -300,6 +247,29 @@ app.run(function ($rootScope, $location, session, $timeout) {
       method: 'POST',
       url:'/accept',
       data: restaurantsTrue
+    })
+  }
+
+})
+
+.controller('suggestionController', function($scope, $http) {
+    $scope.barData;
+    $scope.sendSuggestion = function(data) {
+    console.log('hELLO????!?!?!')
+    return $http({
+      method: 'POST',
+      url: '/admin',
+      data: data
+    })
+    };
+
+    $scope.findYelpBar = function(name, city) {
+    return $http({
+      method: 'POST',
+      url: '/submission',
+      data: {term: name, limit: 3, location: city}
+    }).then(function(res) {
+      $scope.barData = res.data
     })
   }
 })
