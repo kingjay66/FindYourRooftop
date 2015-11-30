@@ -41,6 +41,11 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       controller: 'formController',
       templateUrl: './views/login.html'
     })
+    .state('approve', {
+      url: '/approve',
+      controller: 'approvalController',
+      templateUrl: './views/adminView.html'
+    })
 
 
     // function authenticate($q, user, $state, $timeout) {
@@ -247,5 +252,54 @@ app.run(function ($rootScope, $location, session, $timeout) {
   };
 }])
 
+.controller('approvalController', function($scope, $http) {
+  $scope.suggestions;
+  $scope.id;
+  $scope.showSuggestions = function() {
+  return $http({
+    method: 'POST',
+    url: '/approve'
+  }).then(function(res) {
+    console.log('res.data stringified: ' + JSON.stringify(res.data))
+    $scope.suggestions = res.data
+  })
+  }
 
+  $scope.changeColor = function(context, id, data) {
+    if(data.clicked) {
+      data.clicked = false;
+    } else {
+    data.clicked = true;
+    }
+  }
 
+  $scope.filterTrue = function () {
+    var newArray = []
+    for(var i = 0; i < $scope.suggestions.length; i++) {
+      if($scope.suggestions[i].clicked) {
+        newArray.push($scope.suggestions[i].name);
+      }
+    }
+    return newArray;
+  }
+
+  $scope.rejectSubmission = function () {
+    var restaurantsTrue = $scope.filterTrue()
+    console.log('restaurantsTrue is: ' + restaurantsTrue);
+    return $http({
+      method: 'POST',
+      url: '/reject',
+      data: restaurantsTrue
+    })
+  }
+
+  $scope.acceptSubmission = function () {
+    var restaurantsTrue = $scope.filterTrue();
+    console.log('restaurantsTrue is: ' + restaurantsTrue);
+    return $http({
+      method: 'POST',
+      url:'/accept',
+      data: restaurantsTrue
+    })
+  }
+})
