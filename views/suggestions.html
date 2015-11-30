@@ -9,12 +9,13 @@
         <input type="text" id="inputCity" class="form-control" placeholder="City" ng-model="estCity" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="findYelpBar(estName, estCity)">Search</button>
       </form>
+      <div id='add-suggestion-form'>
+      <div>Which one did you mean?</div>
       <div ng-repeat='data in barData'</div>
       <div>
-      <div>Restaurant name is: {{data.name}}</div>
-      <div>Address is: {{data.location.address[0]}}</div>
+      <div>Restaurant: {{data.name}}</div>
+      <div>Address: {{data.location.address[0]}}</div>
       <button class='add-suggestion' type='submit' ng-click='sendSuggestion(data)'>Add</button>
+    </div>
   </header>
 </body>
-
-
