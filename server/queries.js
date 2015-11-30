@@ -251,3 +251,6 @@ exports.addLocation = function(req, res, location, callback) {
 	// 	next();
 	// })
 	// }
+	// }
+
+
