@@ -44,27 +44,6 @@
   font-weight:bold;
 }
 
-.input-lg {
-  margin-left:27%;
-  width:500px;
-}
-
-.btn:hover {
-  background-color:white;
-  color:black;
-}
-
-.btn {
-  border-radius:0px;
-  border-style:solid;
-  border-color:white;
-  background:none;
-  color:white;
-  /*border:none;*/
-  font-family:Gotham-Book;
-  font-weight:bold;
-}
-
 .jumbotron {
   height: 350px;
   width: 100%;
