@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
     <link rel="stylesheet" href="bootstrap-andrew-custom.css" >
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel='stylesheet' type='text/css' href='views/styles.css'>
     <link rel="stylesheet" type="text/css" href="stylish-portfolio.css">
     <script src="bower_components/lodash/lodash.min.js"></script>
     <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
@@ -25,31 +26,27 @@
 <div ui-view>
 
 
+
 <!-- login and signup buttons -->
+
+  <div class="login" >
+  <div>
     <!-- change data-ng-show to data-ng-hide if want to hide-->
-  <!-- <div class="login" >
-  <div>
     <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="suggestions">
-      suggestions?
+      SUGGESTIONS
     </button>
-  </div>
-  <div>
-    <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="adminLogIn">
-      Admin?
+    <button type="button" class="btn btn-primary" data-ng-show="isLoggedIn" ui-sref="approve">
+      ADMIN
     </button>
-  </div>
-  </div>
- -->
-  <!-- login and signup buttons -->
-  <div class="login">
+
     <button type="button" class="btn btn-primary"  ui-sref="signup">
-      Login
+     Login
+    </button>
+
+    <button type="button" class="btn btn-primary" ng-click="logout()">
+     Logout
     </button>
   </div>
-  <div class="login">
-    <button type="button" class="btn btn-primary" ng-click="logout()">
-      Logout
-    </button>
   </div>
 
 
@@ -70,7 +67,7 @@
               <input type="text" class="form-control input-lg text-center" placeholder="type in a city or zipcode" ng-model="zipCode">
             </div>
             <br>
-            <button type="submit" class="btn btn-primary btn-lg" ng-click="sendZipCode(zipCode); showDetails = true" > Get me to a roof </button>
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="sendZipCode(zipCode); showDetails = true" > Get me to a roof! </button>
           </form>
           <br>
       </div>
