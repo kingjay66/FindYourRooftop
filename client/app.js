@@ -6,6 +6,9 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       url: '/',
       controller: 'appController',
       templateUrl: 'index.html'
+      // controller: 'formController',
+      // templateUrl: './client/register/register.html'
+      // resolve: { authenticate: authenticate }
     })
     .state('adminLogIn', {
       url: '/adminLogIn',
@@ -27,6 +30,37 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
       controller: 'appController',
       templateUrl: 'admin.html'
     })
+    .state('signup', {
+      url: '/signup',
+      controller: 'formController',
+      // templateUrl: './views/signup.html'
+      templateUrl: './client/register/register.html'
+    })
+    .state('login', {
+      url: '/login',
+      controller: 'formController',
+      templateUrl: './views/login.html'
+    })
+
+
+    // function authenticate($q, user, $state, $timeout) {
+    //   if (user.isAuthenticated()) {
+    //     // Resolve the promise successfully
+    //     return $q.when()
+    //   } else {
+    //     // The next bit of code is asynchronously tricky.
+
+    //     $timeout(function() {
+    //       // This code runs after the authentication promise has been rejected.
+    //       // Go to the log-in page
+    //       $state.go('signup')
+    //     })
+
+    //     // Reject the authentication promise to prevent the state from loading
+    //     return $q.reject()
+    //   }
+    // }
+
     //NEED TO INSERT GOOGLE MAPS API
   uiGmapGoogleMapApiProvider.configure({
     key: '',
@@ -39,6 +73,13 @@ angular.module('WGLR', ['ui.bootstrap', 'ngAnimate', 'uiGmapgoogle-maps', 'ui.ro
 
 //   // $scope.findMenu();
 // })
+app.run(function ($rootScope, $location, session, $timeout) {
+  $rootScope.$on("$routeChangeStart", function (event, next, current) {
+    if (!Session.isUserLoggedIn()) {
+          $location.path('/signup');
+      }
+    })
+  }
 
 .controller('appController', function($scope, $http, $location, uiGmapGoogleMapApi) {
 

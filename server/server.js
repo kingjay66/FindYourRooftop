@@ -46,7 +46,7 @@ submissionRouter.post('/', test.callYelpApi, function(req, res) {
 
 var adminRouter = express.Router();
 
-adminRouter.post('/', query.postToDB, function(req, res) {
+adminRouter.post('/admin', query.postToDB, function(req, res) {
   console.log('posted suggestion to database!');
   // res.send('posted suggestion to database!');
   res.send(JSON.stringify({

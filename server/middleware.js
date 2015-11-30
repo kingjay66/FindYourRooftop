@@ -41,7 +41,8 @@ function signupCallback(req, res, user) {
 exports.processSignup = function(req, res, next) {
 	var em = req.body.email;
 	var pass = req.body.password;
-	var newUser = {email: em, password: pass};
+  var role = 10;
+	var newUser = {email: em, password: pass, role: role};
 	console.log('processing signup for ' + em);
 
 	query.addUser(req, res, newUser, signupCallback);
