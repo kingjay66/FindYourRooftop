@@ -1,4 +1,3 @@
-
 var fire = require('firebase');
 var Fireproof = require('fireproof');
 var Promise = require('bluebird');
@@ -47,13 +46,12 @@ exports.deleteSuggestions = function(req, res, next) {
 		// 		}
 		// 	}
 		// }
-    // arg git flow!!!
+
 		//BUT WHY DOES THIS WORK!!
 		for(var key in suggestions) {
 			for(var i=0; i < req.body.length; i++) {
 				if(req.body[i] === suggestions[key].name) {
 					suggestedRef.child(key).remove();
-					console.log('some bogus log');
 				}
 			}
 		}
@@ -114,14 +112,6 @@ exports.postToDB = function(req, res, next) {
 	suggestedRef.push(req.body)
 	next();
 }
-
-
-// exports.postToDB = function(req, res, next) {
-// 	console.log('HI CHELSEA');
-// 	console.log('blahblah response is: ' + JSON.stringify(req.body, null, 2));
-// 	suggestedRef.push(req.body)
-// 	next();
-// }
 
 // helper for getList^
 function queryDB(req, res, next, searchParam, queryParam) {
@@ -261,4 +251,3 @@ exports.addLocation = function(req, res, location, callback) {
 	// 	next();
 	// })
 	// }
-
