@@ -38,35 +38,56 @@ exports.getList = function(req, res, next) {
 exports.deleteSuggestions = function(req, res, next) {
 	suggestedRef.on('value', function(snapshot) {
 		var suggestions = snapshot.val();
-		for(var i = 0; i < req.body.length; i++) {
-			for(var key in suggestions) {
-				// console.log('right before if statement, suggestions[key] is ' + suggestions[key].name)
+		//why does this not work
+		// for(var i = 0; i < req.body.length; i++) {
+		// 	for(var key in suggestions) {
+		// 		if(req.body[i] === suggestions[key].name) {
+		// 			suggestedRef.child(key).remove();
+		// 		}
+		// 	}
+		// }
+
+		//BUT WHY DOES THIS WORK!!
+		for(var key in suggestions) {
+			for(var i=0; i < req.body.length; i++) {
 				if(req.body[i] === suggestions[key].name) {
-					// console.log(req.body[i] + ' is equal to ' + suggestions[key].name )
 					suggestedRef.child(key).remove();
-					console.log(JSON.stringify(suggestions));
 				}
 			}
 		}
 	})
-	// console.log('req body is : ' + req.body)
-	// console.log('in deleteSuggestions');
-	// testingRef.child('a').remove();
+	next();
 }
 
 exports.approveSuggestions = function(req, res, next) {
+	console.log('req.body is ' + req.body);
 	var suggestions;
-	var temp;
-	testingRef.on('value', function(snapshot) {
+	var temp = [];
+	suggestedRef.on('value', function(snapshot) {
 	suggestions = snapshot.val();
-	console.log('suggestions b ' + JSON.stringify(suggestions.b));
-	temp = suggestions.b
+	for(var key in suggestions) {
+		for(var i=0; i < req.body.length; i++) {
+			if(req.body[i] === suggestions[key].name) {
+				console.log('req.body[i] is ' + req.body[i] + ' suggestions is ' + suggestions[key].name)
+				curatedRef.push(suggestions[key]);
+				// suggestedRef.child(key).remove();
+			}
+		}
+	}
 	}).then(function () {
-		console.log('temp is ' + JSON.stringify(temp))
-		curatedRef.push(temp);
-		// testingRef.child('b').remove();
-		next();
+		suggestedRef.on('value', function(snapshot) {
+		var suggestions = snapshot.val();
+		for(var key in suggestions) {
+		for(var i=0; i < req.body.length; i++) {
+			if(req.body[i] === suggestions[key].name) {
+				console.log('req.body[i] is ' + req.body[i] + ' suggestions is ' + suggestions[key].name)
+				suggestedRef.child(key).remove();
+			}
+		}
+	}
 	})
+	})
+	next();
 }
 
 exports.getSuggestions = function(req, res, next) {
@@ -83,7 +104,8 @@ exports.getSuggestions = function(req, res, next) {
 }
 
 exports.postToDB = function(req, res, next) {
-	console.log('blahblah response is: ' + req.body.restaurant)
+	console.log('req.body is ' + JSON.stringify(req.body))
+	console.log('blahblah response is: ' + req.body.name)
 	suggestedRef.push(req.body)
 	next();
 }
