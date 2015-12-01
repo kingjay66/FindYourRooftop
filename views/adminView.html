@@ -1,0 +1,20 @@
+<div id='body-admin'>
+<div ng-controller='approvalController' ng-init='showSuggestions()'>
+    <div id='admin-view'>
+    <div ng-repeat='data in suggestions'>
+    <div class='suggestion-boxes' id='{{data.clicked}}' ng-click='changeColor($index, data.name, data)'>
+    <div>
+    <p><b>Name</b>: {{data.name}}</p>
+    <p><b>Rating</b>: {{data.rating}}/5</p>
+    <p><b>Yelp:</b> <a id='link' href='{{data.link}}'>{{data.link}}</a></p>
+    </div>
+    </div>
+    </div>
+
+<div>
+    <button class='buttons' ng-click='acceptSubmission()'>Accept</button>
+    <button class='buttons' ng-click='rejectSubmission()'>Reject</button>
+</div>
+</div>
+</div>
+</div>

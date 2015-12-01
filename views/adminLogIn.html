@@ -1,0 +1,31 @@
+<body ng-controller="formController">
+  <header id="top" class="header">
+    <div class="text-vertical-center btn btn-dark btn-lg">
+      <h1>Admin LogIn</h1>
+      <br>
+      <!-- Login --><!--Marcus Admin Login-->
+      <form class="form-signin left">
+        <h2 class="form-signin-heading">Fill out the details</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Username" ng-model="email" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="pass" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="submitLogin(email, pass)">Log in</button>
+      </form>
+
+
+<!--  <form>
+  <input type='text' ng-model='' placeholder='Name of establishment'
+ </form> -->
+      </div>
+  </header>
+  <!-- <section id="about" class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2>Wiggler</h2>
+        </div>
+      </div>
+    </div>
+  </section> -->
+</body>
