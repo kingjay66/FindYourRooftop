@@ -92,12 +92,12 @@ userRouter.post('/signup', function(req, res) {
 })
 
 userRouter.get('/logout', function(req, res) {
-  console.log('Before destroy ' + req.session.id);
+  // console.log('Before destroy ' + req.session.id);
   req.session.destroy(function() {
-    console.log('destroyed')
+    console.log('session destroyed')
     res.send('You\'ve been logged out!');
   })
-  console.log('Session is: ' + req.session);
+  // console.log('Session is: ' + req.session);
 })
 
 var menuRouter = express.Router();

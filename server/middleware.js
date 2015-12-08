@@ -2,38 +2,34 @@ var query = require('./queries');
 var bcrypt = require('bcrypt');
 var session = require('express-session');
 var promisify = require("promisify-node");
-//test
+
 exports.validateLogin = function(req, res) {
 	var em = req.body.email;
 	var pass = req.body.password;
 	var user = {email: em, password: pass};
-	// if (req.session) {
-	// 	res.send('logged in');
-	// }
-
-	console.log('finding user: ' + em);
+	// console.log('finding user: ' + em);
 	query.findUser(req, res, user, loginCallback);
 }
 
 var loginCallback =	function(req, res, user, foundUser) {
-		console.log('(loginCB) user was found in db username is ' + foundUser.email)
-		console.log('(loginCB) user password ' + foundUser.password);
+		// console.log('(loginCB) user was found in db username is ' + foundUser.email)
+		// console.log('(loginCB) user password ' + foundUser.password);
 		// test given password against saved
 		if (foundUser.password === user.password) {
 			// if match, create session
-			console.log('PASSWORDS MATCH');
+			// console.log('PASSWORDS MATCH');
 			createSession(req, res, foundUser);
 		} else {
-			console.log('Error, incorrect password');
+			// console.log('Error, incorrect password');
 			res.send('wrong password');
 		}
 }
 
 function signupCallback(req, res, user) {
 	if (user === null) {
-		console.log('(signupCB) cant use that');
+		// console.log('(signupCB) cant use that');
 	} else {
-		console.log('(signupCB) new user is ' + user.email);
+		// console.log('(signupCB) new user is ' + user.email);
 		createSession(req, res, user);
 	}
 };
@@ -43,8 +39,7 @@ exports.processSignup = function(req, res, next) {
 	var pass = req.body.password;
   var role = 10;
 	var newUser = {email: em, password: pass, role: role};
-	console.log('processing signup for ' + em);
-
+	// console.log('processing signup for ' + em);
 	query.addUser(req, res, newUser, signupCallback);
 };
 
@@ -55,7 +50,7 @@ function createSession (req, res, newUser) {
 	// }
   return req.session.regenerate(function() {
     req.session.user = newUser;
-    console.log(req.session.user);
+    // console.log(req.session.user);
     res.send("session created");
   });	
 };
