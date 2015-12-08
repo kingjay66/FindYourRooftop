@@ -22,5 +22,6 @@
     "promisify-node": "^0.2.1",
     "request": "^2.36.0",
     "yelp": "^1.0.1"
-  }
+  },
+  "cacheDirectories": ["node_modules", "bower_components"]
 }
