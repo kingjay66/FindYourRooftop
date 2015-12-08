@@ -13,7 +13,6 @@
     "bootstrap": "~3.3.5",
     "angular-ui-router": "~0.2.15",
     "lodash": "~3.10.1",
-    "angular-simple-logger": "~0.1.5",
     "angular-google-maps": "~2.2.1"
   }
 }
