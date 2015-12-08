@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "start": "node server/server.js",
-    "postinstall": "bash ./post_install.sh"
+    "postinstall": "bower install"
   },
   "author": "",
   "license": "",
