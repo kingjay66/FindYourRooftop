@@ -8,3 +8,10 @@ dist/
 
 *.DS_Store
 */client/.DS_Store
+
+.env
+server/.env
+
+npm-debug.log
+.DS_Store
+/*.env
